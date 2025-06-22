@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="api-page/IMG-20250312-WA0045.png">
+  <title>Download Source Asuma - Ditss</title>
+  <script src="https://cdn.tailwindcss.com"></script> 
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+  <style>
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    iframe {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans transition duration-300">
+
+  <!-- Music Button -->
+  <audio id="music" loop src="https://files.catbox.moe/aoaagd.mp3"></audio> 
+  <button onclick="toggleMusic()" class="fixed top-4 left-4 bg-cyan-600 p-2 rounded-full z-50">
+    <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M14.752 11.168l-6.518-3.77A1 1 0 007 8.26v7.48a1 1 0 001.234.97l6.518-1.856A1 1 0 0016 13.83v-3.66a1 1 0 00-1.248-.997z"/>
+    </svg>
+  </button>
+
+  <!-- Theme Toggle -->
+  <button onclick="toggleTheme()" class="fixed top-4 right-4 bg-gray-700 p-2 rounded-full z-50">
+    <img id="themeIcon" src="https://cdn-icons-png.flaticon.com/512/6714/6714978.png"  alt="mode" class="w-5 h-5">
+  </button>
+
+  <!-- Main Content -->
+  <div class="max-w-4xl mx-auto py-12 px-4 space-y-10">
+    <!-- Header -->
+    <header class="text-center fade-up">
+      <h1 class="text-3xl md:text-4xl font-bold">Download Source Code Asuma Bot WhatsApp</h1>
+      <p class="mt-2 text-sm md:text-base text-gray-400">Source code open-source untuk bot WA multi-device yang mudah dikembangkan.</p>
+    </header>
+
+    <!-- Video Demo -->
+    <section class="fade-up">
+      <h2 class="text-xl font-semibold mb-3">🎥 Video Riview bot - Penggunaan Bot</h2>
+      <iframe class="rounded-lg shadow-lg" 
+              src="https://www.youtube.com/embed/Cpsfcb3Xr4c?si=eYsBB5urjpZaYrbi" 
+              allowfullscreen></iframe>
+    </section>
+
+    <!-- Fitur Utama -->
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg fade-up">
+      <h2 class="font-semibold mb-3 text-lg">🔧 Fitur Utama:</h2>
+      <ul class="space-y-2 text-sm list-disc pl-5 text-gray-300">
+        <li>Autoresponder otomatis untuk pesan masuk</li>
+        <li>Multi-device support (WA Web & Mobile)</li>
+        <li>Anti-spam dan filter chat cerdas</li>
+        <li>Integrasi database lokal & cloud</li>
+        <li>Custom command mudah ditambahkan</li>
+        <li>Dokumentasi sederhana untuk pemula</li>
+      </ul>
+    </section>
+
+    <!-- Dokumentasi Singkat -->
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg fade-up">
+      <h2 class="font-semibold mb-3 text-lg">📘 Dokumentasi Singkat</h2>
+      <pre class="bg-gray-900 p-4 rounded-md overflow-x-auto text-sm">
+{`
+# Install di Pannel ⚙️:
+masukan cmd
+•1 add file dipanel asuma.zip jngn lupa unarchive
+•2 jika sudah masukan cmd npm start
+•3 keluar code pairing, masukan kode pairing ke nomor yg mau jadibot
+•4 tinggal pakai
+•5 note: harap jangan memakai panel murah.
+
+Error? Modul Not Found?
+tandanya panel nggk kuat gini caranya 
+•1 npm start ganti ke yarn
+•2 jika sudah selesai yarn ganti ke npm start lagi
+•3 tinggal pakai ( harap jangan memakai panel murah ) 
+•4 selesai
+  
+# install di termux
+  •1
+`}
+      </pre>
+    </section>
+
+    <!-- Changelog -->
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg fade-up">
+      <h2 class="font-semibold mb-3 text-lg">🆕 Changelog</h2>
+      <ul class="space-y-4 text-sm text-gray-300 list-disc pl-5">
+        <li><strong>v Beta</strong>: Rilis awal source code Asuma bot WhatsApp</li>
+        <li><strong>v1.0.1</strong>: Tambah fitur custom command dan anti-spam dasar</li>
+        <li><strong>v1.1.0</strong>: Integrasi database lokal, fix bug WA connection</li>
+        <li><strong>v1.2.0</strong>: Support multi-device (WA Web + Mobile), UI lebih responsif</li>
+        <li><strong>v1.2.1</strong>: Perbaikan dokumentasi dan update lisensi</li>
+      </ul>
+    </section>
+
+    <!-- Lisensi MIT -->
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg fade-up">
+      <h2 class="font-semibold mb-3 text-lg">📜 Lisensi MIT</h2>
+      <p class="text-sm text-gray-300 mb-2">
+        Copyright (c) 2025 Adiett
+      </p>
+      <p class="text-sm text-gray-300 mb-2">
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+      </p>
+      <p class="text-sm text-gray-300">
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+      </p>
+    </section>
+
+    <!-- Rules Penggunaan -->
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg fade-up">
+      <h2 class="font-semibold mb-3 text-lg">⚠️ Rules Menggunakan Script Asuma</h2>
+      <ul class="space-y-2 text-sm list-disc pl-5 text-gray-300">
+        <li>Jangan menyebarluaskan source code tanpa izin resmi dari developer.</li>
+        <li>Tidak boleh digunakan untuk spam, penipuan, atau aktivitas ilegal lainnya.</li>
+        <li>Kami tidak bertanggung jawab atas penggunaan script yang melanggar ketentuan WhatsApp.</li>
+        <li>Anda diperbolehkan memodifikasi source code untuk keperluan pribadi maupun komersial.</li>
+        <li>Pastikan Anda membaca dan mematuhi lisensi MIT yang terlampir.</li>
+        <li class="text-red-400 font-medium">
+          JANGAN menggunakan panel Pterodactyl abal-abal karena berisiko tinggi terhadap keamanan! 
+          Banyak panel seperti ini mengandung backdoor yang bisa merusak sistem bot Anda dan menyebabkan nomor WhatsApp bot terblokir permanen. 
+          Gunakan selalu layanan hosting atau panel yang terpercaya.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Keterangan Keamanan -->
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg fade-up">
+      <h2 class="font-semibold mb-3 text-lg">🔒 Keterangan Keamanan</h2>
+      <p class="text-sm text-gray-300 mb-2">
+        Source code Asuma tidak menyimpan atau mengirimkan data pribadi Anda ke server eksternal.
+      </p>
+      <p class="text-sm text-gray-300 mb-2">
+        Namun, pastikan Anda tidak menyimpan informasi sensitif seperti token API atau kredensial akun dalam file konfigurasi.
+      </p>
+      <p class="text-sm text-gray-300">
+        Bot ini hanya berjalan di perangkat Anda dan sepenuhnya dikendalikan oleh Anda.
+      </p>
+    </section>
+
+    <!-- Thanks To -->
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg fade-up">
+      <h2 class="font-semibold mb-3 text-lg">🙌 Thanks To (Tqto)</h2>
+      <ul class="space-y-2 text-sm list-disc pl-5 text-gray-300">
+        <li><strong>Adiett</strong> – Developer utama Asuma Bot</li>
+        <li><strong>Ditss Team</strong> – Support infrastruktur dan ide</li>
+        <li><strong>WhatsApp Community</strong> – Inspirasi fitur dan feedback</li>
+        <li><strong>You</strong> – Yang setia mendukung dan menggunakan Asuma!</li>
+      </ul>
+    </section>
+
+    <!-- Download Section -->
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg fade-up">
+      <h2 class="font-semibold mb-3 text-lg">📦 Download Source Code</h2>
+      <a id="downloadLink" href="https://download1530.mediafire.com/5xi1110gb7wgjk9-AINgIw36xkr4irXNB98IL9Xf9-AOnN4TAqqTFZUEynihLjSSUjM2r_DTzyLKzVP5eNPV9cNwQ5Mh50I3_SQZXnu6j1eYnw3JKbqR6au-w5iH59iWIUCHTdZaMd_aH4Gb48Zhny3TqwersO8R9bN_wF8sZOJ05g/1fs4l8chluc5olc/AsuMaa.zip" 
+         target="_blank" rel="noopener noreferrer"
+         class="flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Script Asuma v Beta
+      </a>
+      <p id="downloadStatus" class="text-yellow-400 mt-2 hidden">Menghubungkan ke server...</p>
+    </section>
+
+    <!-- Info Update -->
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg fade-up">
+      <a href="https://whatsapp.com/channel/0029VaflxUXGE56szLxlPJ3c"  target="_blank" rel="noopener noreferrer"
+         class="block text-center bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+        Info Update Terbaru
+      </a>
+    </section>
+
+    <!-- Riview Bot -->
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg fade-up">
+      <a href="https://wa.me/6283113264512?text=.menu" target="_blank" rel="noopener noreferrer"
+         class="block text-center bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+        Review Bot Langsung
+      </a>
+    </section>
+
+    <!-- Back to Home -->
+    <div class="text-center text-sm text-gray-400 fade-up">
+      <a href="index.html" class="underline hover:text-white">Kembali ke Halaman Utama</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-xs text-gray-500 fade-up">
+      powered by <strong>Ditss</strong> © 2025
+    </footer>
+  </div>
+
+  <!-- Sociabuzz Donation -->
+  <script type="text/javascript" src="https://storage.sociabuzz.com/storage/js/main/buttononwebsite/index.min.js"></script>
+  <script>sbBoW.draw("adiett","ZG9uYXRl","position-bottom-right","#3a6c00","#FFFFFF")</script> 
+
+  <!-- JavaScript Logic -->
+  <script>
+    const music = document.getElementById("music");
+    const playIcon = document.getElementById("playIcon");
+    let musicStarted = false;
+
+    function toggleMusic() {
+      if (!musicStarted) {
+        music.play().catch(() => {});
+        musicStarted = true;
+        playIcon.setAttribute("fill", "white");
+      } else {
+        music.paused ? music.play() : music.pause();
+        playIcon.setAttribute("fill", music.paused ? "none" : "white");
+      }
+    }
+
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById("themeIcon");
+      icon.src = document.documentElement.classList.contains('dark')
+        ? "https://cdn-icons-png.flaticon.com/512/6714/6714978.png" 
+        : "https://cdn-icons-png.flaticon.com/512/869/869869.png"; 
+    }
+
+    // Fade-up Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+      });
+    });
+    document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
+
+    // Download Status
+    document.getElementById("downloadLink").addEventListener("click", () => {
+      document.getElementById("downloadStatus").classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
