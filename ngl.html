@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id" id="html">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>@asuma.multi.device • NGL</title>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: background 0.4s ease, color 0.4s;
+      overflow: hidden;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Background gradient dinamis */
+    body {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    }
+
+    /* Partikel */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      z-index: 2;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      transition: transform 0.3s ease;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: white;
+      font-weight: bold;
+      font-size: 28px;
+      box-shadow: 0 6px 16px rgba(37, 117, 252, 0.3);
+    }
+
+    .username {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 16px;
+      border: 1px solid var(--input-border);
+      border-radius: 16px;
+      font-size: 16px;
+      resize: none;
+      outline: none;
+      background: var(--input-bg);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+    textarea:focus {
+      border-color: var(--accent-start);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+      color: white;
+      border: none;
+      border-radius: 16px;
+      padding: 14px 40px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--btn-shadow);
+      width: 100%;
+    }
+    .btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: var(--btn-shadow-hover);
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    .btn.loading {
+      position: relative;
+      color: transparent;
+    }
+    .btn.loading::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .status {
+      margin-top: 20px;
+      min-height: 22px;
+      font-size: 15px;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .status.show {
+      opacity: 1;
+    }
+    .status.success { color: #10b981; }
+    .status.error { color: #ef4444; }
+    .status.info { color: var(--text-secondary); }
+
+    .footer {
+      margin-top: 24px;
+      color: var(--text-tertiary);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .theme-toggle, .perf-toggle {
+      background: var(--toggle-bg);
+      border: none;
+      width: 40px;
+      height: 24px;
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+    }
+    .theme-toggle::after, .perf-toggle::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: white;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      transition: transform 0.3s ease;
+    }
+    .theme-toggle::after { transform: var(--toggle-pos); }
+    .perf-toggle::after { transform: var(--perf-toggle-pos); }
+
+    /* Variabel Warna */
+    :root {
+      --bg-primary: #f5f7fa;
+      --bg-secondary: #c3cfe2;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-border: rgba(255, 255, 255, 0.6);
+      --card-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      --text-primary: #1f1f1f;
+      --text-secondary: #666;
+      --text-tertiary: #999;
+      --input-bg: #fafafa;
+      --input-border: #e0e0e0;
+      --accent-start: #6a11cb;
+      --accent-end: #2575fc;
+      --accent-glow: rgba(37, 117, 252, 0.3);
+      --btn-shadow: 0 4px 12px rgba(37, 117, 252, 0.3);
+      --btn-shadow-hover: 0 6px 16px rgba(37, 117, 252, 0.4);
+      --toggle-bg: #ccc;
+      --toggle-pos: translateX(0);
+      --perf-toggle-pos: translateX(0);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f0f1a;
+      --bg-secondary: #2d2d4d;
+      --card-bg: rgba(20, 20, 25, 0.85);
+      --card-border: rgba(60, 60, 70, 0.6);
+      --card-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      --text-primary: #f0f0f0;
+      --text-secondary: #aaa;
+      --text-tertiary: #888;
+      --input-bg: #1a1a1f;
+      --input-border: #333;
+      --accent-start: #7b2ff7;
+      --accent-end: #f107a3;
+      --accent-glow: rgba(241, 7, 163, 0.3);
+      --btn-shadow: 0 4px 12px rgba(241, 7, 163, 0.3);
+      --btn-shadow-hover: 0 6px 16px rgba(241, 7, 163, 0.4);
+      --toggle-bg: #7b2ff7;
+      --toggle-pos: translateX(16px);
+    }
+
+    [data-perf="low"] {
+      --perf-toggle-pos: translateX(16px);
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <div class="container">
+    <div class="card">
+      <div class="logo">A</div>
+      <div class="username">@asuma.multi.device</div>
+      <div class="subtitle">kirim pesan anonim padaku… 💬</div>
+
+      <label for="pesan" class="sr-only">Tulis pesan anonim</label>
+      <textarea 
+        id="pesan" 
+        placeholder="Contoh: 'Aku suka cara kamu bikin bot WA 😳'"
+        aria-describedby="status"
+      ></textarea>
+
+      <button class="btn" id="sendBtn" onclick="kirimPesan()">Kirim!</button>
+
+      <div class="status" id="status" role="alert"></div>
+
+      <div class="footer">
+        <span>Dibuat dengan ❤️</span>
+        <div style="display:flex;gap:8px;">
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
+          <button class="perf-toggle" id="perfToggle" aria-label="Toggle particle effects"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // ===== RATE LIMIT =====
+    let lastSubmitTime = 0;
+
+    // ===== PARTICLE OPTIMIZATION =====
+    function initParticles() {
+      const isMobile = window.innerWidth < 768;
+      const isLowPerf = document.body.getAttribute('data-perf') === 'low';
+      
+      if (isLowPerf) {
+        // Matikan partikel
+        const canvas = document.getElementById('particles-js');
+        canvas.innerHTML = '';
+        return;
+      }
+
+      const isDark = document.getElementById('html').getAttribute('data-theme') === 'dark';
+      const particleColor = isDark ? "#8e2de2" : "#6a11cb";
+
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: isMobile ? 30 : 60, density: { enable: true, value_area: 800 } },
+          color: { value: particleColor },
+          shape: { type: "circle" },
+          opacity: { value: 0.2, random: true },
+          size: { value: 2, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: particleColor,
+            opacity: 0.15,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 1,
+            direction: "none",
+            random: true,
+            straight: false,
+            out_mode: "out",
+            bounce: false
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 0.3 } },
+            push: { particles_nb: 2 }
+          }
+        },
+        retina_detect: true
+      });
+    }
+
+    // ===== THEME & PERF TOGGLE =====
+    const html = document.getElementById('html');
+    const themeToggle = document.getElementById('themeToggle');
+    const perfToggle = document.getElementById('perfToggle');
+
+    // Load saved preferences
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedPerf = localStorage.getItem('perf') || 'high';
+    
+    if (savedTheme === 'dark') html.setAttribute('data-theme', 'dark');
+    if (savedPerf === 'low') document.body.setAttribute('data-perf', 'low');
+
+    // Init particles
+    initParticles();
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      initParticles(); // Re-init untuk ganti warna
+    });
+
+    perfToggle.addEventListener('click', () => {
+      const isLow = document.body.getAttribute('data-perf') === 'low';
+      if (isLow) {
+        document.body.removeAttribute('data-perf');
+        localStorage.setItem('perf', 'high');
+      } else {
+        document.body.setAttribute('data-perf', 'low');
+        localStorage.setItem('perf', 'low');
+      }
+      initParticles();
+    });
+
+    // ===== UX =====
+    window.addEventListener('load', () => {
+      const textarea = document.getElementById("pesan");
+      textarea.focus();
+      textarea.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key === "Enter") kirimPesan();
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (document.body.getAttribute('data-perf') !== 'low') {
+        initParticles();
+      }
+    });
+
+    // ===== STATUS =====
+    function showStatus(text, type = 'info') {
+      const el = document.getElementById("status");
+      el.textContent = text;
+      el.className = `status show ${type}`;
+      
+      if (type === 'success') {
+        setTimeout(() => el.classList.remove('show'), 4000);
+      }
+    }
+
+    // ===== KIRIM PESAN =====
+    async function kirimPesan() {
+      const now = Date.now();
+      if (now - lastSubmitTime < 2000) {
+        showStatus("⏳ Tunggu sebentar ya...", "error");
+        return;
+      }
+
+      const pesanInput = document.getElementById("pesan");
+      const btn = document.getElementById("sendBtn");
+      let pesan = pesanInput.value.trim();
+
+      if (!pesan) {
+        showStatus("📝 Tulis pesan dulu ya!", "error");
+        pesanInput.focus();
+        return;
+      }
+      if (pesan.length > 500) {
+        showStatus("❌ Maksimal 500 karakter", "error");
+        return;
+      }
+
+      pesan = pesan.replace(/</g, "<").replace(/>/g, ">");
+
+      btn.disabled = true;
+      btn.classList.add("loading");
+      showStatus("⏳ Mengirim...", "info");
+
+      try {
+        const deviceId = Array.from(crypto.getRandomValues(new Uint8Array(21)))
+          .map(b => b.toString(16).padStart(2, '0'))
+          .join('');
+
+        const res = await fetch('https://ngl.link/api/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Referer': 'https://ngl.link/asuma.multi.device',
+            'Origin': 'https://ngl.link'
+          },
+          body: new URLSearchParams({
+            username: 'asuma.multi.device',
+            question: pesan,
+            deviceId,
+            gameSlug: '',
+            referrer: ''
+          })
+        });
+
+        if (res.ok) {
+          lastSubmitTime = Date.now();
+          showStatus("✅ Terkirim! 💌 Pesanmu aman dan anonim.", "success");
+          pesanInput.value = "";
+          
+          // Ganti tombol jadi "Kirim Lagi"
+          setTimeout(() => {
+            btn.textContent = "Kirim Lagi!";
+            btn.disabled = false;
+            btn.classList.remove("loading");
+          }, 1000);
+        } else {
+          throw new Error("Gagal");
+        }
+      } catch (err) {
+        showStatus("❌ Gagal. Coba lagi!", "error");
+        btn.disabled = false;
+        btn.classList.remove("loading");
+      }
+    }
+  </script>
+</body>
+</html>
